@@ -210,8 +210,11 @@ class GoogleDriveIndexer(Indexer):
             response: dict = files_client.list(
                 spaces="drive",
                 fields=fields_input,
-                corpora="user",
+                corpora="allDrives",
                 pageToken=page_token,
+                includeItemsFromAllDrives=True,
+                includeTeamDriveItems=True,
+                supportsAllDrives=True,
                 q=q,
             ).execute()
             if files := response.get("files", []):
